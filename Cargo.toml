@@ -1,0 +1,12 @@
+[package]
+name = "evafetch"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.7"
+rand = "0.8"
+dirs = "4.0"
+unicode-width = "0.1"
+crossterm = "0.26"
