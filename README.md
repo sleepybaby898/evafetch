@@ -28,6 +28,8 @@ after installation, the program can be run with
 evafetch
 ```
 
+---
+
 ## configuration
 
 the config file is located at
