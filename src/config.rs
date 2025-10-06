@@ -5,8 +5,8 @@ use std::fs;
 pub struct Config {
     pub border: bool,
     pub padding: usize,
+    pub numbering: bool,
 }
-
 
 #[derive(Debug, Deserialize)]
 struct ConfigFile {
@@ -14,7 +14,6 @@ struct ConfigFile {
 }
 
 impl Config {
-    // load config, if it doesn't exist, create it
     pub fn load_or_default() -> Self {
         let mut path = dirs::home_dir().expect("Failed to get home directory");
         path.push(".config/evafetch/config.toml");
@@ -25,16 +24,18 @@ impl Config {
             }
             fs::write(
                 &path,
-                "[config]\nborder = true\npadding = 2\n",
+                "[config]\nborder = true\npadding = 2\nnumbering = false\n",
             )
             .expect("Failed to write default config");
         }
 
         let content = fs::read_to_string(&path).expect("Failed to read config.toml");
-
-        // deseralize into config struct
         let file: ConfigFile = toml::from_str(&content).unwrap_or(ConfigFile {
-            config: Config { border: true, padding: 2 },
+            config: Config {
+                border: true,
+                padding: 2,
+                numbering: false,
+            },
         });
 
         file.config

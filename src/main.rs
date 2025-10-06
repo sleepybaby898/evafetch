@@ -10,13 +10,19 @@ fn main() {
     // load config
     let config = Config::load_or_default();
 
-    // check if quotes exists
-    let quotes_path = Quotes::check_file();
-
     // load quotes
-    let quotes = Quotes::load_from_file(&quotes_path);
+    let mut quotes_path = dirs::home_dir().expect("Failed to get home directory");
+    quotes_path.push(".config/evafetch/quotes.toml");
+    let quotes = Quotes::load_from_file(quotes_path.to_str().unwrap());
 
-    // select quote
-    let selected = quotes.random_quote();
-    print_quote(Some(selected), config.border, config.padding);
+    // pick a random quote
+    let (selected, idx) = quotes.random_quote_indexed();
+
+    print_quote(
+        Some(selected),
+        config.border,
+        config.padding,
+        if config.numbering { Some(idx) } else { None },
+        quotes.total(),
+    );
 }

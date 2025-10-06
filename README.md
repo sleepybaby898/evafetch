@@ -7,7 +7,7 @@ supports customizable borders and padding
 ## features
 
 - displays random quotes
-- customizable border and padding
+- customizable border, padding and quote numbers
 - works on linux and mac, maybe windows
 
 ---
@@ -43,6 +43,7 @@ example `config.toml`:
 [config]
 border = true # show a border around quotes
 padding = 2 # number of spaces around the quote
+numbering = false # whether to show 'quote 3 of 27' etc.
 ```
 a config file will be automatically generated
 
